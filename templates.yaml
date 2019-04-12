@@ -1,0 +1,13 @@
+email:
+  user_welcome:
+    subject: Welcome to VideoCoin
+    content: |
+      Welcome! 
+      Your name is {{.name}}! 
+    type: text/html
+  user_recovery:
+    subject: "VideoCoin: Password Recovery"
+    content: |
+      Your recovery link is <a href="http://{{.domain}}/recovery/?token={{.token}}">here</a>
+    type: text/html
+web: {}

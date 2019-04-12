@@ -1,0 +1,34 @@
+GOOS?=linux
+GOARCH?=amd64
+
+NAME=vc_notifications
+VERSION=$$(git describe --abbrev=0)-$$(git rev-parse --short HEAD)
+
+version:
+	@echo ${VERSION}
+
+build:
+	GOOS=${GOOS} GOARCH=${GOARCH} \
+		go build \
+			-mod=vendor
+			-ldflags="-w -s -X main.Version=${VERSION}" \
+			-o bin/${NAME} \
+			./cmd/main.go
+
+build-dev:
+	env GO111MODULE=on GOOS=${GOOS} GOARCH=${GOARCH} \
+		go build \
+			-ldflags="-w -s -X main.Version=${VERSION}" \
+			-o bin/${NAME} \
+			./cmd/main.go
+
+vendor:
+	env GO111MODULE=on go mod vendor
+
+docker-build:
+	docker build -t gcr.io/${GCP_PROJECT}/${NAME}:${VERSION} -f Dockerfile .
+
+docker-push:
+	gcloud docker -- push gcr.io/${GCP_PROJECT}/${NAME}:${VERSION}
+
+release: build docker-build docker-push
