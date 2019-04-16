@@ -1,5 +1,7 @@
 package service
 
+import "github.com/VideoCoin/cloud-pkg/mqmux"
+
 type Service struct {
 	cfg  *Config
 	core *Core
@@ -16,7 +18,13 @@ func NewService(cfg *Config) (*Service, error) {
 		Logger:    cfg.Logger,
 	}
 
-	core, err := NewCore(cfg.MQURI, store, coreOpts)
+	mq, err := mqmux.NewWorkerMux(cfg.MQURI, cfg.Name)
+	if err != nil {
+		return nil, err
+	}
+	mq.Logger = cfg.Logger.WithField("system", "mq")
+
+	core, err := NewCore(mq, store, coreOpts)
 	if err != nil {
 		return nil, err
 	}
