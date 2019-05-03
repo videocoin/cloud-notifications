@@ -1,0 +1,67 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    app: {{ .Release.Name }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicasCount }}
+  strategy:
+    rollingUpdate:
+      maxUnavailable: {{ .Values.maxUnavailableCount }}
+  template:
+    metadata:
+      name: {{ .Release.Name }}
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Release.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: NOTIFICATIONS_TEMPLATES
+              value: /opt/videocoin/bin/templates.yaml
+            - name: MQURI
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Chart.Name }}
+                  key: mqUri
+            - name: SENDGRID_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Chart.Name }}
+                  key: sendgridApiKey
+            - name: PUSHER_API_APPID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Chart.Name }}
+                  key: pusherApiAppId
+            - name: PUSHER_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Chart.Name }}
+                  key: pusherApiKey
+            - name: PUSHER_API_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Chart.Name }}
+                  key: pusherApiSecret
+            - name: SENTRY_DSN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Chart.Name }}
+                  key: sentryDsn
+          {{- if .Values.resources }}
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+          {{- end }}
+      volumes:
+        - name: config
+          configMap:
+            name: {{ .Release.Name }}
+        - name: secrets
+          secret:
+            secretName: {{ .Release.Name }}

@@ -1,7 +1,9 @@
 GOOS?=linux
 GOARCH?=amd64
 
-NAME=vc_notifications
+GCP_PROJECT=videocoin-network
+
+NAME=notifications
 VERSION=$$(git describe --abbrev=0)-$$(git rev-parse --short HEAD)
 
 version:
@@ -10,7 +12,6 @@ version:
 build:
 	GOOS=${GOOS} GOARCH=${GOARCH} \
 		go build \
-			-mod=vendor
 			-ldflags="-w -s -X main.Version=${VERSION}" \
 			-o bin/${NAME} \
 			./cmd/main.go
@@ -22,7 +23,7 @@ build-dev:
 			-o bin/${NAME} \
 			./cmd/main.go
 
-vendor:
+deps:
 	env GO111MODULE=on go mod vendor
 
 docker-build:

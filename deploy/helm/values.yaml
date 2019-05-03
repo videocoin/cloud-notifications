@@ -1,0 +1,31 @@
+replicasCount: 3
+maxUnavailableCount: 0
+
+image:
+  repository: gcr.io/videocoin-network/notifications
+  tag: latest
+  pullPolicy: Always
+
+config: {}
+
+autoscaler:
+  minCount: 1
+  maxCount: 10
+  targets:
+    targetCPUUtilizationPercentage: 70
+
+resources:
+  limits:
+   cpu: 200m
+   memory: 200Mi
+  requests:
+   cpu: 200m
+   memory: 200Mi
+
+secrets:
+  mqUri: ""
+  sentryDsn: ""
+  sendgridApiKey: ""
+  pusherApiAppId: ""
+  pusherApiKey: ""
+  pusherApiSecret: ""

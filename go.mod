@@ -13,6 +13,7 @@ require (
 	github.com/grpc-ecosystem/grpc-gateway v1.8.5 // indirect
 	github.com/kelseyhightower/envconfig v1.3.0
 	github.com/pkg/errors v0.8.1 // indirect
+	github.com/pusher/pusher-http-go v1.3.0
 	github.com/sendgrid/rest v2.4.1+incompatible // indirect
 	github.com/sendgrid/sendgrid-go v3.4.1+incompatible
 	github.com/sirupsen/logrus v1.4.1
