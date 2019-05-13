@@ -4,6 +4,8 @@ github.com/VideoCoin/cloud-api v0.0.0-20190412171730-b434bd6c6bd9 h1:B0fZCRbpOkF
 github.com/VideoCoin/cloud-api v0.0.0-20190412171730-b434bd6c6bd9/go.mod h1:BfO7vo1wOuXAFn5PdxKjgbvyAoa2ERilXVzMc04NB34=
 github.com/VideoCoin/cloud-pkg v0.0.0-20190410195939-9b8c822a17e7 h1:fCizXhRaQFUJImQsnR0lpV+N6b116H0vxDbEEO3M4IA=
 github.com/VideoCoin/cloud-pkg v0.0.0-20190410195939-9b8c822a17e7/go.mod h1:Vks3HtLx+ETgxZzyb9FiD9lanDRnbhLFhPZc68TKpbY=
+github.com/centrifugal/gocent v2.0.2+incompatible h1:kVsJ2kPBzbOkLmArU+CvDHxCFIbLAv5Z2E6bhtyI0Xs=
+github.com/centrifugal/gocent v2.0.2+incompatible/go.mod h1:gtbj3+fMApCIcaGmGvk2BinwEauUtGeu8YZPLcedOvQ=
 github.com/certifi/gocertifi v0.0.0-20190410005359-59a85de7f35e h1:9574pc8MX6rF/QyO14SPHhM5KKIOo9fkb/1ifuYMTKU=
 github.com/certifi/gocertifi v0.0.0-20190410005359-59a85de7f35e/go.mod h1:GJKEexRPVJrBSOjoqN5VNOIKJ5Q3RViH6eu3puDRwx4=
 github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDkc90ppPyw=

@@ -2,6 +2,7 @@ package service
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -11,7 +12,7 @@ import (
 
 	v1 "github.com/VideoCoin/cloud-api/notifications/v1"
 	"github.com/VideoCoin/cloud-pkg/mqmux"
-	"github.com/pusher/pusher-http-go"
+	"github.com/centrifugal/gocent"
 	"github.com/sendgrid/sendgrid-go"
 	"github.com/sendgrid/sendgrid-go/helpers/mail"
 	"github.com/sirupsen/logrus"
@@ -36,19 +37,17 @@ type Core struct {
 	mq    *mqmux.WorkerMux
 	store *TemplateStore
 
-	email  *sendgrid.Client
-	pusher *pusher.Client
+	email *sendgrid.Client
+	cent  *gocent.Client
 }
 
 func NewCore(mq *mqmux.WorkerMux, store *TemplateStore, opts *CoreOption) (*Core, error) {
 	emailCli := sendgrid.NewSendClient(os.Getenv("SENDGRID_API_KEY"))
-	pucherCli := &pusher.Client{
-		AppId:   os.Getenv("PUSHER_API_APPID"),
-		Key:     os.Getenv("PUSHER_API_KEY"),
-		Secret:  os.Getenv("PUSHER_API_SECRET"),
-		Cluster: "us2",
-		Secure:  true,
-	}
+
+	centCli := gocent.New(gocent.Config{
+		Addr: os.Getenv("CENT_API_ADDR"),
+		Key:  os.Getenv("CENT_API_KEY"),
+	})
 
 	return &Core{
 		opts:   opts,
@@ -56,7 +55,7 @@ func NewCore(mq *mqmux.WorkerMux, store *TemplateStore, opts *CoreOption) (*Core
 		mq:     mq,
 		store:  store,
 		email:  emailCli,
-		pusher: pucherCli,
+		cent:   centCli,
 	}, nil
 }
 
@@ -151,17 +150,17 @@ func (c *Core) performWebNotification(n *v1.Notification) error {
 		"target": n.Target.String(),
 	})
 
-	toChannel := fmt.Sprintf("user-%s", n.Params["user_id"])
+	toChannel := fmt.Sprintf("users#%s", n.Params["user_id"])
 
-	event, ok := n.Params["event"]
-	if !ok {
-		return ErrUnknownEvent
+	logger.WithField("to channel", toChannel).WithField("params", n.Params).Info("sending push")
+
+	payload, err := json.Marshal(n.Params)
+	if err != nil {
+		logger.Error(err)
+		return err
 	}
 
-	logger.WithField("to channel", toChannel).WithField("event", event).Info("sending push")
-
-	_, err := c.pusher.Trigger(toChannel, event, n.Params)
-
+	err = c.cent.Publish(context.Background(), toChannel, payload)
 	if err != nil {
 		logger.Error(err)
 		return err
