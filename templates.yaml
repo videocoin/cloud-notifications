@@ -2,197 +2,908 @@ email:
   user_welcome:
     subject: Welcome to VideoCoin
     content: |
-      <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-      <html xmlns="http://www.w3.org/1999/xhtml">
-        <head>
-          <meta name="viewport" content="width=device-width"/>
-          <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-          <title>Hello from VideoCoin</title>
-          <style type="text/css">
-            body{
-              margin: 0 auto;
-              padding: 0;
-              min-width: 100%;
-              font-family: sans-serif;
-            }
-            table{
-              margin: 50px 0 50px 0;
-            }
-            .header{
-              height: 40px;
-              text-align: center;
-              text-transform: uppercase;
-              font-size: 24px;
-              font-weight: bold;
-            }
-            .content{
-              height: 100px;
-              font-size: 18px;
-              line-height: 30px;
-            }
-            .subscribe{
-              height: 70px;
-              text-align: center;
-            }
-            .button{
-              text-align: center;
-              font-size: 18px;
-              font-family: sans-serif;
-              font-weight: bold;
-              padding: 0 30px 0 30px;
-            }
-            .button a{
-              color: #FFFFFF;
-              text-decoration: none;
-            }
-            .buttonwrapper{
-              margin: 0 auto;
-            }
-            .footer{
-              text-transform: uppercase;
-              text-align: center;
-              height: 40px;
-              font-size: 14px;
-              font-style: italic;
-            }
-            .footer a{
-              color: #000000;
-              text-decoration: none;
-              font-style: normal;
-            }
+      <!doctype html>
+      <html>
+      <head>
+          <meta content="width=device-width" name="viewport" />
+          <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+          <link href="https://fonts.googleapis.com/css?family=Rubik:400,500,700" rel="stylesheet">
+          <title>Email Title</title>
+          <style>
+              html {
+                  font-family: 'Rubik', sans-serif;
+              }
+
+              img {
+                  border: none;
+                  -ms-interpolation-mode: bicubic;
+                  max-width: 100%;
+              }
+
+              body {
+                  background-color: #f6f6f6;
+                  font-family: 'Rubik', sans-serif;
+                  -webkit-font-smoothing: antialiased;
+                  font-size: 14px;
+                  line-height: 1.4;
+                  margin: 0;
+                  padding: 0;
+                  -ms-text-size-adjust: 100%;
+                  -webkit-text-size-adjust: 100%;
+                  color: #0C0417;
+                  text-align: center;
+              }
+
+              table {
+                  border-collapse: separate;
+                  mso-table-lspace: 0pt;
+                  mso-table-rspace: 0pt;
+                  width: 100%;
+              }
+
+              table td {
+                  font-family: 'Rubik', sans-serif;
+                  font-size: 14px;
+                  vertical-align: top;
+              }
+
+              .body {
+                  background-color: #f6f6f6;
+                  width: 100%;
+              }
+
+              .container {
+                  display: block;
+                  margin: 0 auto !important;
+                  max-width: 580px;
+                  padding: 10px;
+                  width: 580px;
+              }
+
+              .header {
+                  padding: 28px 0;
+                  background-image: url(https://storage.googleapis.com/vc-static-content/header.png);
+                  background-size: 100% 100%;
+                  background-repeat: no-repeat;
+              }
+
+              .header td {
+                  text-align: center;
+              }
+
+              .content {
+                  box-sizing: border-box;
+                  display: block;
+                  margin: 0 auto;
+                  max-width: 580px;
+                  padding: 10px;
+              }
+
+
+              .main {
+                  background: #ffffff;
+                  border-radius: 3px;
+                  width: 100%;
+              }
+
+              .wrapper {
+                  box-sizing: border-box;
+                  padding: 20px;
+              }
+
+              .content-block {
+                  padding-bottom: 10px;
+                  padding-top: 10px;
+              }
+
+              .footer {
+                  clear: both;
+                  text-align: center;
+                  width: 100%;
+                  background-image: url("https://storage.googleapis.com/vc-static-content/footer.png");
+                  background-size: 100% 100%;
+                  background-repeat: no-repeat;
+                  padding: 10px 0;
+              }
+
+              .footer td,
+              .footer p,
+              .footer span,
+              .footer a {
+                  color: #AA90D0;
+                  font-size: 14px;
+                  text-align: center;
+              }
+
+              .footer-subttl {
+                  font-size: 12px;
+                  color: rgba(184, 168, 206, .72);
+              }
+
+
+              h1,
+              h2,
+              h3,
+              h4 {
+                  color: #000000;
+                  font-family: 'Rubik', sans-serif;
+                  font-weight: 400;
+                  line-height: 1.4;
+                  margin: 0;
+                  margin-bottom: 30px;
+              }
+
+              h1 {
+                  font-size: 35px;
+                  font-weight: 300;
+                  text-align: center;
+                  text-transform: capitalize;
+              }
+
+              p,
+              ul,
+              ol {
+                  font-family: 'Rubik', sans-serif;
+                  font-size: 16px;
+                  font-weight: normal;
+                  margin: 0;
+                  margin-bottom: 15px;
+                  color: rgba(12, 4, 23, .5);
+              }
+
+              p li,
+              ul li,
+              ol li {
+                  list-style-position: inside;
+                  margin-left: 5px;
+              }
+
+              a {
+                  color: #3498db;
+                  text-decoration: underline;
+              }
+
+
+              .btn {
+                  box-sizing: border-box;
+                  width: 100%;
+              }
+
+              .btn>tbody>tr>td {
+                  padding-bottom: 15px;
+              }
+
+              .btn table {
+                  width: auto;
+              }
+
+              .btn table td {
+                  background-color: #ffffff;
+                  border-radius: 5px;
+                  text-align: center;
+              }
+
+              .btn a {
+                  background-color: #ffffff;
+                  border: solid 1px #9056E4;
+                  border-radius: 5px;
+                  box-sizing: border-box;
+                  color: #9056E4;
+                  cursor: pointer;
+                  display: inline-block;
+                  font-size: 14px;
+                  font-weight: 500;
+                  margin: 0;
+                  padding: 13px 50px;
+                  text-decoration: none;
+                  text-transform: capitalize;
+              }
+
+              .btn-primary table td {
+                  background-color: #9056E4;
+                  border-radius: 28px;
+              }
+
+              .btn-primary a {
+                  background-color: #9056E4;
+                  border-color: #9056E4;
+                  color: #0C0417;
+                  font-weight: 500;
+                  border-radius: 28px;
+                  text-transform: uppercase;
+              }
+
+
+              .last {
+                  margin-bottom: 0;
+              }
+
+              .first {
+                  margin-top: 0;
+              }
+
+              .align-center {
+                  text-align: center;
+              }
+
+              .align-right {
+                  text-align: right;
+              }
+
+              .align-left {
+                  text-align: left;
+              }
+
+              .clear {
+                  clear: both;
+              }
+
+              .mt0 {
+                  margin-top: 0;
+              }
+
+              .mb0 {
+                  margin-bottom: 0;
+              }
+
+              .preheader {
+                  color: transparent;
+                  display: none;
+                  height: 0;
+                  max-height: 0;
+                  max-width: 0;
+                  opacity: 0;
+                  overflow: hidden;
+                  mso-hide: all;
+                  visibility: hidden;
+                  width: 0;
+              }
+
+              .powered-by a {
+                  text-decoration: none;
+              }
+
+              hr {
+                  border: 0;
+                  border-bottom: 1px solid #f6f6f6;
+                  margin: 20px 0;
+              }
+
+
+              @media only screen and (max-width: 620px) {
+                  table[class=body] h1 {
+                      font-size: 28px !important;
+                      margin-bottom: 10px !important;
+                  }
+
+                  table[class=body] p,
+                  table[class=body] ul,
+                  table[class=body] ol,
+                  table[class=body] td,
+                  table[class=body] span,
+                  table[class=body] a {
+                      font-size: 16px !important;
+                  }
+
+                  table[class=body] .wrapper,
+                  table[class=body] .article {
+                      padding: 10px !important;
+                  }
+
+                  table[class=body] .content {
+                      padding: 0 !important;
+                  }
+
+                  table[class=body] .container {
+                      padding: 0 !important;
+                      width: 100% !important;
+                  }
+
+                  table[class=body] .main {
+                      border-left-width: 0 !important;
+                      border-radius: 0 !important;
+                      border-right-width: 0 !important;
+                  }
+
+                  table[class=body] .btn table {
+                      width: 100% !important;
+                  }
+
+                  table[class=body] .btn a {
+                      width: 100% !important;
+                  }
+
+                  table[class=body] .img-responsive {
+                      height: auto !important;
+                      max-width: 100% !important;
+                      width: auto !important;
+                  }
+              }
+
+
+              @media all {
+                  .ExternalClass {
+                      width: 100%;
+                  }
+
+                  .ExternalClass,
+                  .ExternalClass p,
+                  .ExternalClass span,
+                  .ExternalClass font,
+                  .ExternalClass td,
+                  .ExternalClass div {
+                      line-height: 100%;
+                  }
+
+                  .apple-link a {
+                      color: inherit !important;
+                      font-family: inherit !important;
+                      font-size: inherit !important;
+                      font-weight: inherit !important;
+                      line-height: inherit !important;
+                      text-decoration: none !important;
+                  }
+
+                  .btn-primary table td:hover {
+                      background-color: #6c3eaf !important;
+                  }
+
+                  .btn-primary a:hover {
+                      background-color: #6c3eaf !important;
+                      border-color: #6c3eaf !important;
+                  }
+              }
+
+              .subtitle {
+                  font-size: 20px;
+                  font-weight: 500;
+                  color: rgba(12, 4, 23, .36);
+                  text-transform: uppercase;
+                  line-height: 32px;
+              }
+
+              .title {
+                  font-size: 32px;
+                  line-height: 40px;
+                  margin-bottom: 36px;
+              }
+
+              .subsection {
+                  margin-top: 78px;
+                  font-size: 24px;
+                  font-weight: bold;
+                  margin-bottom: 10px;
+                  line-height: 1;
+                  letter-spacing: .8px;
+              }
           </style>
-        </head>
-        <body bgcolor="#009587">
-          <table bgcolor="#FFFFFF" width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tr class="header">
-              <td style="padding: 40px;">
-                It's worth it !
+      </head>
+
+      <body class="">
+      <span class="preheader">This is preheader text. Some clients will show this text as a preview.</span>
+      <table border="0" cellpadding="0" cellspacing="0" class="body" role="presentation">
+          <tr>
+              <td>&nbsp;</td>
+              <td class="container">
+                  <div class="content">
+                      <div class="header">
+                          <table border="0" cellpadding="0" cellspacing="0" role="presentation">
+                              <tr>
+                                  <td class="content-block">
+                                      <img alt="VideoCoin" height="73" src="https://storage.googleapis.com/vc-static-content/logo.png" width="255">
+                                  </td>
+                              </tr>
+                          </table>
+                      </div>
+                      <table class="main" role="presentation">
+                          <tr>
+                              <td class="wrapper">
+                                  <table border="0" cellpadding="0" cellspacing="0" role="presentation">
+                                      <tr>
+                                          <td>
+                                              <div class="subtitle">Publisher studio</div>
+                                              <div class="title">Welcome {{.name}}!</div>
+                                              <p>Thank you for joining us! We are exicted to show you VideoCoin Publisher Studio!
+                                              You are all set to sing in and give it a try!
+                                              </p>
+
+                                              <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary"
+                                                    role="presentation">
+                                                  <tbody>
+                                                  <tr>
+                                                      <td align="center">
+                                                          <table border="0" cellpadding="0" cellspacing="0"
+                                                                role="presentation">
+                                                              <tbody>
+                                                              <tr>
+                                                                  <td><a href="http://{{.domain}}/sign-in" target="_blank">Sing In!</a></td>
+                                                              </tr>
+                                                              </tbody>
+                                                          </table>
+                                                      </td>
+                                                  </tr>
+                                                  </tbody>
+                                              </table>
+                                          </td>
+                                      </tr>
+                                  </table>
+                              </td>
+                          </tr>
+                      </table>
+
+                      <div class="footer">
+                          <table border="0" cellpadding="0" cellspacing="0" role="presentation">
+                              <tr>
+                                  <td class="content-block">
+                                      <div class="footer-title">
+                                          Made by the VideoCoin Development Association Ltd.
+                                      </div>
+                                      <div class="footer-subttl">
+                                          84 W Santa Clara St #460, San Jose, CA 95113
+                                      </div>
+                                  </td>
+                              </tr>
+                          </table>
+                      </div>
+                  </div>
               </td>
-            </tr>
-            <tr class="content">
-              <td style="padding:10px;">
-                <p>
-                  Hi <b>{{ .name }}</b>, <br/>
-                  Welcome to <b>VideoCoin</b>.
-                </p>
-              </td>
-            </tr>
-            <tr class="subscribe">
-              <td style="padding: 20px 0 0 0;">
-                <table bgcolor="#009587" border="0" cellspacing="0" cellpadding="0" class="buttonwrapper">
-                  <tr>
-                    <td class="button" height="45">
-                      <a href="https://videocoin.network" target="_blank">SUBSCRIBE NOW</a>
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-            <tr class="footer">
-              <td style="padding: 40px;">
-                Designed by <a href="https://videocoin.network" target="_blank">VideoCoin Network</a>
-              </td>
-            </tr>
-          </table>
-        </body>
+              <td>&nbsp;</td>
+          </tr>
+      </table>
+      </body>
       </html>
     type: text/html
   user_recovery:
     subject: "VideoCoin: Password Recovery"
     content: |
-      <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-      <html xmlns="http://www.w3.org/1999/xhtml">
-        <head>
-          <meta name="viewport" content="width=device-width"/>
-          <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-          <title>VideoCoin: Password Recovery</title>
-          <style type="text/css">
-            body{
-              margin: 0 auto;
-              padding: 0;
-              min-width: 100%;
-              font-family: sans-serif;
-            }
-            table{
-              margin: 50px 0 50px 0;
-            }
-            .header{
-              height: 40px;
-              text-align: center;
-              text-transform: uppercase;
-              font-size: 24px;
-              font-weight: bold;
-            }
-            .content{
-              height: 100px;
-              font-size: 18px;
-              line-height: 30px;
-            }
-            .subscribe{
-              height: 70px;
-              text-align: center;
-            }
-            .button{
-              text-align: center;
-              font-size: 18px;
-              font-family: sans-serif;
-              font-weight: bold;
-              padding: 0 30px 0 30px;
-            }
-            .button a{
-              color: #FFFFFF;
-              text-decoration: none;
-            }
-            .buttonwrapper{
-              margin: 0 auto;
-            }
-            .footer{
-              text-transform: uppercase;
-              text-align: center;
-              height: 40px;
-              font-size: 14px;
-              font-style: italic;
-            }
-            .footer a{
-              color: #000000;
-              text-decoration: none;
-              font-style: normal;
-            }
+      <!doctype html>
+      <html>
+      <head>
+          <meta content="width=device-width" name="viewport" />
+          <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+          <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700" rel="stylesheet">
+          <title>Email Title</title>
+          <style>
+              html {
+                  font-family: 'Rubik', sans-serif;
+              }
+
+              img {
+                  border: none;
+                  -ms-interpolation-mode: bicubic;
+                  max-width: 100%;
+              }
+
+              body {
+                  background-color: #f6f6f6;
+                  font-family: 'Rubik', sans-serif;
+                  -webkit-font-smoothing: antialiased;
+                  font-size: 14px;
+                  line-height: 1.4;
+                  margin: 0;
+                  padding: 0;
+                  -ms-text-size-adjust: 100%;
+                  -webkit-text-size-adjust: 100%;
+                  color: #0C0417;
+                  text-align: center;
+              }
+
+              table {
+                  border-collapse: separate;
+                  mso-table-lspace: 0pt;
+                  mso-table-rspace: 0pt;
+                  width: 100%;
+              }
+
+              table td {
+                  font-family: 'Rubik', sans-serif;
+                  font-size: 14px;
+                  vertical-align: top;
+              }
+
+              .body {
+                  background-color: #f6f6f6;
+                  width: 100%;
+              }
+
+              .container {
+                  display: block;
+                  margin: 0 auto !important;
+                  max-width: 580px;
+                  padding: 10px;
+                  width: 580px;
+              }
+
+              .header {
+                  padding: 28px 0;
+                  background-image: url(https://storage.googleapis.com/vc-static-content/header.png);
+                  background-size: 100% 100%;
+                  background-repeat: no-repeat;
+              }
+
+              .header td {
+                  text-align: center;
+              }
+
+              .content {
+                  box-sizing: border-box;
+                  display: block;
+                  margin: 0 auto;
+                  max-width: 580px;
+                  padding: 10px;
+              }
+
+
+              .main {
+                  background: #ffffff;
+                  border-radius: 3px;
+                  width: 100%;
+              }
+
+              .wrapper {
+                  box-sizing: border-box;
+                  padding: 20px;
+              }
+
+              .content-block {
+                  padding-bottom: 10px;
+                  padding-top: 10px;
+              }
+
+              .footer {
+                  clear: both;
+                  text-align: center;
+                  width: 100%;
+                  background-image: url(https://storage.googleapis.com/vc-static-content/footer.png);
+                  background-size: 100% 100%;
+                  background-repeat: no-repeat;
+                  padding: 10px 0;
+              }
+
+              .footer td,
+              .footer p,
+              .footer span,
+              .footer a {
+                  color: #AA90D0;
+                  font-size: 14px;
+                  text-align: center;
+              }
+
+              .footer-subttl {
+                  font-size: 12px;
+                  color: rgba(184, 168, 206, .72);
+              }
+
+
+              h1,
+              h2,
+              h3,
+              h4 {
+                  color: #000000;
+                  font-family: 'Rubik', sans-serif;
+                  font-weight: 400;
+                  line-height: 1.4;
+                  margin: 0;
+                  margin-bottom: 30px;
+              }
+
+              h1 {
+                  font-size: 35px;
+                  font-weight: 300;
+                  text-align: center;
+                  text-transform: capitalize;
+              }
+
+              p,
+              ul,
+              ol {
+                  font-family: 'Rubik', sans-serif;
+                  font-size: 16px;
+                  font-weight: normal;
+                  margin: 0;
+                  margin-bottom: 15px;
+                  color: rgba(12, 4, 23, .5);
+              }
+
+              p li,
+              ul li,
+              ol li {
+                  list-style-position: inside;
+                  margin-left: 5px;
+              }
+
+              a {
+                  color: #3498db;
+                  text-decoration: underline;
+              }
+
+
+              .btn {
+                  box-sizing: border-box;
+                  width: 100%;
+              }
+
+              .btn>tbody>tr>td {
+                  padding-bottom: 15px;
+              }
+
+              .btn table {
+                  width: auto;
+              }
+
+              .btn table td {
+                  background-color: #ffffff;
+                  border-radius: 5px;
+                  text-align: center;
+              }
+
+              .btn a {
+                  background-color: #ffffff;
+                  border: solid 1px #9056E4;
+                  border-radius: 5px;
+                  box-sizing: border-box;
+                  color: #9056E4;
+                  cursor: pointer;
+                  display: inline-block;
+                  font-size: 14px;
+                  font-weight: 500;
+                  margin: 0;
+                  padding: 13px 50px;
+                  text-decoration: none;
+                  text-transform: capitalize;
+              }
+
+              .btn-primary table td {
+                  background-color: #9056E4;
+                  border-radius: 28px;
+              }
+
+              .btn-primary a {
+                  background-color: #9056E4;
+                  border-color: #9056E4;
+                  color: #0C0417;
+                  font-weight: 500;
+                  border-radius: 28px;
+                  text-transform: uppercase;
+              }
+
+
+              .last {
+                  margin-bottom: 0;
+              }
+
+              .first {
+                  margin-top: 0;
+              }
+
+              .align-center {
+                  text-align: center;
+              }
+
+              .align-right {
+                  text-align: right;
+              }
+
+              .align-left {
+                  text-align: left;
+              }
+
+              .clear {
+                  clear: both;
+              }
+
+              .mt0 {
+                  margin-top: 0;
+              }
+
+              .mb0 {
+                  margin-bottom: 0;
+              }
+
+              .preheader {
+                  color: transparent;
+                  display: none;
+                  height: 0;
+                  max-height: 0;
+                  max-width: 0;
+                  opacity: 0;
+                  overflow: hidden;
+                  mso-hide: all;
+                  visibility: hidden;
+                  width: 0;
+              }
+
+              .powered-by a {
+                  text-decoration: none;
+              }
+
+              hr {
+                  border: 0;
+                  border-bottom: 1px solid #f6f6f6;
+                  margin: 20px 0;
+              }
+
+
+              @media only screen and (max-width: 620px) {
+                  table[class=body] h1 {
+                      font-size: 28px !important;
+                      margin-bottom: 10px !important;
+                  }
+
+                  table[class=body] p,
+                  table[class=body] ul,
+                  table[class=body] ol,
+                  table[class=body] td,
+                  table[class=body] span,
+                  table[class=body] a {
+                      font-size: 16px !important;
+                  }
+
+                  table[class=body] .wrapper,
+                  table[class=body] .article {
+                      padding: 10px !important;
+                  }
+
+                  table[class=body] .content {
+                      padding: 0 !important;
+                  }
+
+                  table[class=body] .container {
+                      padding: 0 !important;
+                      width: 100% !important;
+                  }
+
+                  table[class=body] .main {
+                      border-left-width: 0 !important;
+                      border-radius: 0 !important;
+                      border-right-width: 0 !important;
+                  }
+
+                  table[class=body] .btn table {
+                      width: 100% !important;
+                  }
+
+                  table[class=body] .btn a {
+                      width: 100% !important;
+                  }
+
+                  table[class=body] .img-responsive {
+                      height: auto !important;
+                      max-width: 100% !important;
+                      width: auto !important;
+                  }
+              }
+
+
+              @media all {
+                  .ExternalClass {
+                      width: 100%;
+                  }
+
+                  .ExternalClass,
+                  .ExternalClass p,
+                  .ExternalClass span,
+                  .ExternalClass font,
+                  .ExternalClass td,
+                  .ExternalClass div {
+                      line-height: 100%;
+                  }
+
+                  .apple-link a {
+                      color: inherit !important;
+                      font-family: inherit !important;
+                      font-size: inherit !important;
+                      font-weight: inherit !important;
+                      line-height: inherit !important;
+                      text-decoration: none !important;
+                  }
+
+                  .btn-primary table td:hover {
+                      background-color: #6c3eaf !important;
+                  }
+
+                  .btn-primary a:hover {
+                      background-color: #6c3eaf !important;
+                      border-color: #6c3eaf !important;
+                  }
+              }
+
+              .subtitle {
+                  font-size: 20px;
+                  font-weight: 500;
+                  color: rgba(12, 4, 23, .36);
+                  text-transform: uppercase;
+                  line-height: 32px;
+              }
+
+              .title {
+                  font-size: 32px;
+                  line-height: 40px;
+                  margin-bottom: 36px;
+              }
+
+              .subsection {
+                  margin-top: 78px;
+                  font-size: 24px;
+                  font-weight: bold;
+                  margin-bottom: 10px;
+                  line-height: 1;
+                  letter-spacing: .8px;
+              }
           </style>
-        </head>
-        <body bgcolor="#009587">
-          <table bgcolor="#FFFFFF" width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tr class="header">
-              <td style="padding: 40px;">
-                It's worth it !
+      </head>
+
+      <body class="">
+      <span class="preheader">This is preheader text. Some clients will show this text as a preview.</span>
+      <table border="0" cellpadding="0" cellspacing="0" class="body" role="presentation">
+          <tr>
+              <td>&nbsp;</td>
+              <td class="container">
+                  <div class="content">
+                      <div class="header">
+                          <table border="0" cellpadding="0" cellspacing="0" role="presentation">
+                              <tr>
+                                  <td class="content-block">
+                                      <img alt="VideoCoin" height="73" src="https://storage.googleapis.com/vc-static-content/logo.png" width="255">
+                                  </td>
+                              </tr>
+                          </table>
+                      </div>
+                      <table class="main" role="presentation">
+                          <tr>
+                              <td class="wrapper">
+                                  <table border="0" cellpadding="0" cellspacing="0" role="presentation">
+                                      <tr>
+                                          <td>
+                                              <div class="subtitle">Publisher studio</div>
+                                              <div class="title">Password Reset</div>
+                                              <p style="margin-bottom: 48px">If you requested a reset for your password, click the link below to finish reseting your password.</p>
+                                              <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary"
+                                                    role="presentation">
+                                                  <tbody>
+                                                  <tr>
+                                                      <td align="center">
+                                                          <table border="0" cellpadding="0" cellspacing="0"
+                                                                role="presentation">
+                                                              <tbody>
+                                                              <tr>
+                                                                  <td><a href="http://{{.domain}}/recovery/?token={{.token}}"
+                                                                        target="_blank">Button</a></td>
+                                                              </tr>
+                                                              </tbody>
+                                                          </table>
+                                                      </td>
+                                                  </tr>
+                                                  </tbody>
+                                              </table>
+                                              <p style="font-weight: 300; margin-top: 9px">If you did not request a password reset, you can safely ignore this email. Only a person with access to your email can reset your account password.If you did not request a password reset, you can safely ignore this email. Only a person with access to your email can reset your account password.</p>
+                                          </td>
+                                      </tr>
+                                  </table>
+                              </td>
+                          </tr>
+                      </table>
+
+                      <div class="footer">
+                          <table border="0" cellpadding="0" cellspacing="0" role="presentation">
+                              <tr>
+                                  <td class="content-block">
+                                      <div class="footer-title">
+                                          Made by the VideoCoin Development Association Ltd.
+                                      </div>
+                                      <div class="footer-subttl">
+                                          84 W Santa Clara St #460, San Jose, CA 95113
+                                      </div>
+                                  </td>
+                              </tr>
+                          </table>
+                      </div>
+                  </div>
               </td>
-            </tr>
-            <tr class="content">
-              <td style="padding:10px;">
-                <p>
-                  Hi <b>{{ .name }}</b>, <br/>
-                  Your recovery link is <a href="http://{{.domain}}/recovery/?token={{.token}}">here</a>.
-                </p>
-              </td>
-            </tr>
-            <tr class="subscribe">
-              <td style="padding: 20px 0 0 0;">
-                <table bgcolor="#009587" border="0" cellspacing="0" cellpadding="0" class="buttonwrapper">
-                  <tr>
-                    <td class="button" height="45">
-                      <a href="https://videocoin.network" target="_blank">SUBSCRIBE NOW</a>
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-            <tr class="footer">
-              <td style="padding: 40px;">
-                Designed by <a href="https://videocoin.network" target="_blank">VideoCoin Network</a>
-              </td>
-            </tr>
-          </table>
-        </body>
+              <td>&nbsp;</td>
+          </tr>
+      </table>
+      </body>
       </html>
     type: text/html
 web: {}
