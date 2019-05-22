@@ -51,9 +51,8 @@ function get_vars() {
     readonly KUBE_CONTEXT=`consul kv get -http-addr=${CONSUL_ADDR} config/${ENV}/common/kube_context`
     readonly MQ_URI=`consul kv get -http-addr=${CONSUL_ADDR} config/${ENV}/services/${CHART_NAME}/secrets/mqUri`
     readonly SENDGRID_API_KEY=`consul kv get -http-addr=${CONSUL_ADDR} config/${ENV}/services/${CHART_NAME}/secrets/sendgridApiKey`
-    readonly PUSHER_API_APPID=`consul kv get -http-addr=${CONSUL_ADDR} config/${ENV}/services/${CHART_NAME}/secrets/pusherApiAppId`
-    readonly PUSHER_API_KEY=`consul kv get -http-addr=${CONSUL_ADDR} config/${ENV}/services/${CHART_NAME}/secrets/pusherApiKey`
-    readonly PUSHER_API_SECRET=`consul kv get -http-addr=${CONSUL_ADDR} config/${ENV}/services/${CHART_NAME}/secrets/pusherApiSecret`
+    readonly CENT_API_ADDR=`consul kv get -http-addr=${CONSUL_ADDR} config/${ENV}/services/${CHART_NAME}/secrets/centApiAddr`
+    readonly CENT_API_KEY=`consul kv get -http-addr=${CONSUL_ADDR} config/${ENV}/services/${CHART_NAME}/secrets/centApiKey`
     readonly SENTRY_DSN=`consul kv get -http-addr=${CONSUL_ADDR} config/${ENV}/services/${CHART_NAME}/secrets/sentryDsn`
 }
 
@@ -65,9 +64,8 @@ function deploy() {
         --set image.tag="${VERSION}" \
         --set secrets.mqUri="${MQ_URI}" \
         --set secrets.sendgridApiKey="${SENDGRID_API_KEY}" \
-        --set secrets.pusherApiAppId="${PUSHER_API_APPID}" \
-        --set secrets.pusherApiKey="${PUSHER_API_KEY}" \
-        --set secrets.pusherApiSecret="${PUSHER_API_SECRET}" \
+        --set secrets.centApiAddr="${CENT_API_ADDR}" \
+        --set secrets.centApiKey="${CENT_API_KEY}" \
         --set secrets.sentryDsn="${SENTRY_DSN}" \
         --wait ${CHART_NAME} ${CHART_DIR}
 }

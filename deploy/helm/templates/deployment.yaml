@@ -34,21 +34,16 @@ spec:
                 secretKeyRef:
                   name: {{ .Chart.Name }}
                   key: sendgridApiKey
-            - name: PUSHER_API_APPID
+            - name: CENT_API_ADDR
               valueFrom:
                 secretKeyRef:
                   name: {{ .Chart.Name }}
-                  key: pusherApiAppId
-            - name: PUSHER_API_KEY
+                  key: centApiAddr
+            - name: CENT_API_KEY
               valueFrom:
                 secretKeyRef:
                   name: {{ .Chart.Name }}
-                  key: pusherApiKey
-            - name: PUSHER_API_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Chart.Name }}
-                  key: pusherApiSecret
+                  key: centApiKey
             - name: SENTRY_DSN
               valueFrom:
                 secretKeyRef:

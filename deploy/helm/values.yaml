@@ -1,4 +1,4 @@
-replicasCount: 3
+replicasCount: 1
 maxUnavailableCount: 0
 
 image:
@@ -16,16 +16,15 @@ autoscaler:
 
 resources:
   limits:
-   cpu: 200m
-   memory: 200Mi
+    cpu: 200m
+    memory: 200Mi
   requests:
-   cpu: 200m
-   memory: 200Mi
+    cpu: 200m
+    memory: 200Mi
 
 secrets:
   mqUri: ""
   sentryDsn: ""
   sendgridApiKey: ""
-  pusherApiAppId: ""
-  pusherApiKey: ""
-  pusherApiSecret: ""
+  centApiAddr: ""
+  centApiKey: ""
