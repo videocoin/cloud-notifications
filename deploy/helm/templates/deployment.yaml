@@ -23,7 +23,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: NOTIFICATIONS_TEMPLATES
-              value: /opt/videocoin/bin/templates.yaml
+              value: /opt/videocoin/bin
             - name: MQURI
               valueFrom:
                 secretKeyRef:
