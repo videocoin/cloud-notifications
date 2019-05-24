@@ -1,4 +1,4 @@
-GOOS?=linux
+GOOS?=darwin
 GOARCH?=amd64
 
 GCP_PROJECT=videocoin-network
