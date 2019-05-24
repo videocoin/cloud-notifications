@@ -19,12 +19,13 @@ var (
 
 type Template struct {
 	Subject string `yaml:"subject"`
-	Content string
 }
 
 type TemplateStore struct {
 	Email map[string]Template `yaml:"email"`
 	Web   map[string]Template `yaml:"web"`
+
+	path string
 }
 
 func NewTemplateStore(path string) (*TemplateStore, error) {
@@ -46,28 +47,19 @@ func NewTemplateStore(path string) (*TemplateStore, error) {
 		return nil, err
 	}
 
-	for k, v := range store.Email {
-		content, err := renderTemplate(path, k)
-		if err != nil {
-			return nil, err
-		}
-		v.Content = content
-
-		_ = ioutil.WriteFile(k+"new.html", []byte(content), 0644)
-	}
+	store.path = path
 
 	return store, nil
 }
 
-func renderTemplate(path, name string) (string, error) {
-	t, err := template.ParseFiles(fmt.Sprintf("%s/%s.html", path, name), path+"/style.css")
+func (ts *TemplateStore) renderTemplate(name string, params map[string]string) (string, error) {
+	t, err := template.ParseFiles(fmt.Sprintf("%s/%s.html", ts.path, name), ts.path+"/style.css")
 	if err != nil {
 		return "", err
 	}
 
 	var buf bytes.Buffer
-	d := map[string]interface{}{}
-	err = t.Option("missingkey=zero").ExecuteTemplate(&buf, name+".html", d)
+	err = t.ExecuteTemplate(&buf, name+".html", params)
 	if err != nil {
 		return "", err
 	}
