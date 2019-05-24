@@ -17,6 +17,7 @@ import (
 	"github.com/sendgrid/sendgrid-go/helpers/mail"
 	"github.com/sirupsen/logrus"
 	"github.com/streadway/amqp"
+	"github.com/vanng822/go-premailer/premailer"
 )
 
 var (
@@ -118,8 +119,21 @@ func (c *Core) performEmailNotification(n *v1.Notification) error {
 		return ErrUnknownRecipient
 	}
 
+	prem, err := premailer.NewPremailerFromFile(
+		fmt.Sprintf("/opt/videocoin/bin/%s.html", n.Template), premailer.NewOptions())
+	if err != nil {
+		logger.Error(err)
+		return err
+	}
+
+	html, err := prem.Transform()
+	if err != nil {
+		logger.Error(err)
+		return err
+	}
+
 	buf := bytes.NewBuffer(nil)
-	err = applyTemplate(buf, n.Template, nt.Content, n.Params)
+	err = applyTemplate(buf, n.Template, html, n.Params)
 	if err != nil {
 		logger.Error(err)
 		return err

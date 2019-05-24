@@ -3,6 +3,7 @@ module github.com/VideoCoin/cloud-notifications
 go 1.12
 
 require (
+	github.com/PuerkitoBio/goquery v1.5.0 // indirect
 	github.com/VideoCoin/cloud-api v0.0.0-20190412171730-b434bd6c6bd9
 	github.com/VideoCoin/cloud-pkg v0.0.0-20190410195939-9b8c822a17e7
 	github.com/centrifugal/gocent v2.0.2+incompatible
@@ -11,6 +12,7 @@ require (
 	github.com/getsentry/raven-go v0.2.0 // indirect
 	github.com/gogo/protobuf v1.2.1 // indirect
 	github.com/golang/protobuf v1.3.1 // indirect
+	github.com/gorilla/css v1.0.0 // indirect
 	github.com/grpc-ecosystem/grpc-gateway v1.8.5 // indirect
 	github.com/kelseyhightower/envconfig v1.3.0
 	github.com/pkg/errors v0.8.1 // indirect
@@ -19,6 +21,8 @@ require (
 	github.com/sendgrid/sendgrid-go v3.4.1+incompatible
 	github.com/sirupsen/logrus v1.4.1
 	github.com/streadway/amqp v0.0.0-20190404075320-75d898a42a94
+	github.com/vanng822/css v0.0.0-20190504095207-a21e860bcd04 // indirect
+	github.com/vanng822/go-premailer v0.0.0-20190504065308-ac25997d78c7
 	golang.org/x/net v0.0.0-20190404232315-eb5bcb51f2a3 // indirect
 	google.golang.org/appengine v1.4.0 // indirect
 	google.golang.org/genproto v0.0.0-20190404172233-64821d5d2107 // indirect

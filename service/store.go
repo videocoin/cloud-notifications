@@ -15,8 +15,6 @@ var (
 
 type Template struct {
 	Subject string `yaml:"subject"`
-	Content string `yaml:"content"`
-	Type    string `yaml:"type"`
 }
 
 type TemplateStore struct {
