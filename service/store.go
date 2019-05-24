@@ -1,11 +1,15 @@
 package service
 
 import (
+	"bytes"
 	"errors"
+	"fmt"
 	"io/ioutil"
 	"os"
+	"text/template"
 
 	v1 "github.com/VideoCoin/cloud-api/notifications/v1"
+	"github.com/vanng822/go-premailer/premailer"
 	"gopkg.in/yaml.v2"
 )
 
@@ -20,10 +24,12 @@ type Template struct {
 type TemplateStore struct {
 	Email map[string]Template `yaml:"email"`
 	Web   map[string]Template `yaml:"web"`
+
+	path string
 }
 
 func NewTemplateStore(path string) (*TemplateStore, error) {
-	f, err := os.Open(path)
+	f, err := os.Open(path + "/templates.yaml")
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +47,35 @@ func NewTemplateStore(path string) (*TemplateStore, error) {
 		return nil, err
 	}
 
+	store.path = path
+
 	return store, nil
+}
+
+func (ts *TemplateStore) renderTemplate(name string, params map[string]string) (string, error) {
+	t, err := template.ParseFiles(fmt.Sprintf("%s/%s.html", ts.path, name), ts.path+"/style.css")
+	if err != nil {
+		return "", err
+	}
+
+	var buf bytes.Buffer
+	err = t.ExecuteTemplate(&buf, name+".html", params)
+	if err != nil {
+		return "", err
+	}
+
+	prem, err := premailer.NewPremailerFromString(
+		buf.String(), premailer.NewOptions())
+	if err != nil {
+		return "", err
+	}
+
+	html, err := prem.Transform()
+	if err != nil {
+		return "", err
+	}
+
+	return html, nil
 }
 
 func (s *TemplateStore) GetTemplate(t v1.NotificationTarget, name string) (*Template, error) {

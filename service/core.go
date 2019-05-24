@@ -1,14 +1,11 @@
 package service
 
 import (
-	"bytes"
 	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io"
 	"os"
-	"text/template"
 
 	v1 "github.com/VideoCoin/cloud-api/notifications/v1"
 	"github.com/VideoCoin/cloud-pkg/mqmux"
@@ -17,7 +14,6 @@ import (
 	"github.com/sendgrid/sendgrid-go/helpers/mail"
 	"github.com/sirupsen/logrus"
 	"github.com/streadway/amqp"
-	"github.com/vanng822/go-premailer/premailer"
 )
 
 var (
@@ -65,6 +61,7 @@ func (c *Core) Start() error {
 	if err != nil {
 		return err
 	}
+
 	return c.mq.Run()
 }
 
@@ -119,21 +116,7 @@ func (c *Core) performEmailNotification(n *v1.Notification) error {
 		return ErrUnknownRecipient
 	}
 
-	prem, err := premailer.NewPremailerFromFile(
-		fmt.Sprintf("/opt/videocoin/bin/%s.html", n.Template), premailer.NewOptions())
-	if err != nil {
-		logger.Error(err)
-		return err
-	}
-
-	html, err := prem.Transform()
-	if err != nil {
-		logger.Error(err)
-		return err
-	}
-
-	buf := bytes.NewBuffer(nil)
-	err = applyTemplate(buf, n.Template, html, n.Params)
+	html, err := c.store.renderTemplate(n.Template, n.Params)
 	if err != nil {
 		logger.Error(err)
 		return err
@@ -141,9 +124,9 @@ func (c *Core) performEmailNotification(n *v1.Notification) error {
 
 	logger.WithField("to", toEmail).Info("sending email")
 
-	from := mail.NewEmail("", c.opts.FromEmail)
+	from := mail.NewEmail("VideoCoin", c.opts.FromEmail)
 	to := mail.NewEmail("", toEmail)
-	message := mail.NewSingleEmail(from, nt.Subject, to, " ", buf.String())
+	message := mail.NewSingleEmail(from, nt.Subject, to, " ", html)
 	resp, err := c.email.Send(message)
 	if err != nil {
 		logger.Error(err)
@@ -177,20 +160,6 @@ func (c *Core) performWebNotification(n *v1.Notification) error {
 	err = c.cent.Publish(context.Background(), toChannel, payload)
 	if err != nil {
 		logger.Error(err)
-		return err
-	}
-
-	return nil
-}
-
-func applyTemplate(wr io.Writer, name, content string, params interface{}) error {
-	t, err := template.New(name).Parse(content)
-	if err != nil {
-		return err
-	}
-
-	err = t.Execute(wr, params)
-	if err != nil {
 		return err
 	}
 
