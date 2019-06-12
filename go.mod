@@ -5,13 +5,10 @@ go 1.12
 require (
 	cloud.google.com/go v0.39.0 // indirect
 	github.com/PuerkitoBio/goquery v1.5.0 // indirect
-	github.com/VideoCoin/cloud-api v0.0.0-20190531191527-f6dcbdbdc819
-	github.com/VideoCoin/cloud-pkg v0.0.0-20190410195939-9b8c822a17e7
+	github.com/VideoCoin/cloud-api v0.0.16
+	github.com/VideoCoin/cloud-pkg v0.0.0-20190605220614-21bcb15160bb
 	github.com/centrifugal/gocent v2.0.2+incompatible
-	github.com/certifi/gocertifi v0.0.0-20190410005359-59a85de7f35e // indirect
 	github.com/envoyproxy/go-control-plane v0.6.9 // indirect
-	github.com/evalphobia/logrus_sentry v0.8.2 // indirect
-	github.com/getsentry/raven-go v0.2.0 // indirect
 	github.com/golang/mock v1.3.1 // indirect
 	github.com/google/btree v1.0.0 // indirect
 	github.com/google/pprof v0.0.0-20190515194954-54271f7e092f // indirect
@@ -20,13 +17,15 @@ require (
 	github.com/kisielk/errcheck v1.2.0 // indirect
 	github.com/kr/pty v1.1.4 // indirect
 	github.com/lyft/protoc-gen-validate v0.0.13 // indirect
-	github.com/pkg/errors v0.8.1 // indirect
+	github.com/opentracing/opentracing-go v1.1.0
 	github.com/pusher/pusher-http-go v1.3.0 // indirect
 	github.com/rogpeppe/fastuuid v1.1.0 // indirect
 	github.com/sendgrid/rest v2.4.1+incompatible // indirect
 	github.com/sendgrid/sendgrid-go v3.4.1+incompatible
-	github.com/sirupsen/logrus v1.4.1
+	github.com/sirupsen/logrus v1.4.2
 	github.com/streadway/amqp v0.0.0-20190404075320-75d898a42a94
+	github.com/uber/jaeger-client-go v2.16.0+incompatible // indirect
+	github.com/uber/jaeger-lib v2.0.0+incompatible // indirect
 	github.com/vanng822/css v0.0.0-20190504095207-a21e860bcd04 // indirect
 	github.com/vanng822/go-premailer v0.0.0-20190504065308-ac25997d78c7
 	go.opencensus.io v0.22.0 // indirect

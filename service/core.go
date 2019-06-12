@@ -10,6 +10,8 @@ import (
 	v1 "github.com/VideoCoin/cloud-api/notifications/v1"
 	"github.com/VideoCoin/cloud-pkg/mqmux"
 	"github.com/centrifugal/gocent"
+	"github.com/opentracing/opentracing-go"
+	"github.com/opentracing/opentracing-go/ext"
 	"github.com/sendgrid/sendgrid-go"
 	"github.com/sendgrid/sendgrid-go/helpers/mail"
 	"github.com/sirupsen/logrus"
@@ -72,8 +74,20 @@ func (c *Core) Stop() error {
 func (c *Core) performMessage(msg amqp.Delivery) error {
 	c.logger.Debugf("received a message: %s", msg.Body)
 
+	var span opentracing.Span
+	tracer := opentracing.GlobalTracer()
+	spanCtx, err := tracer.Extract(opentracing.TextMap, mqmux.RMQHeaderCarrier(msg.Headers))
+
+	if err != nil {
+		span = tracer.StartSpan("performMessage")
+	} else {
+		span = tracer.StartSpan("performMessage", ext.RPCServerOption(spanCtx))
+	}
+
+	defer span.Finish()
+
 	notification := &v1.Notification{}
-	err := json.Unmarshal(msg.Body, notification)
+	err = json.Unmarshal(msg.Body, notification)
 	if err != nil {
 		c.logger.Error(err)
 		return err
