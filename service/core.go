@@ -7,8 +7,8 @@ import (
 	"fmt"
 	"os"
 
-	v1 "github.com/VideoCoin/cloud-api/notifications/v1"
-	"github.com/VideoCoin/cloud-pkg/mqmux"
+	v1 "github.com/videocoin/cloud-api/notifications/v1"
+	"github.com/videocoin/cloud-pkg/mqmux"
 	"github.com/centrifugal/gocent"
 	"github.com/opentracing/opentracing-go"
 	"github.com/opentracing/opentracing-go/ext"

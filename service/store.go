@@ -8,7 +8,7 @@ import (
 	"os"
 	"text/template"
 
-	v1 "github.com/VideoCoin/cloud-api/notifications/v1"
+	v1 "github.com/videocoin/cloud-api/notifications/v1"
 	"github.com/vanng822/go-premailer/premailer"
 	"gopkg.in/yaml.v2"
 )
