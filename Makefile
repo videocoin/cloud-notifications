@@ -6,18 +6,15 @@ GCP_PROJECT=videocoin-network
 NAME=notifications
 VERSION=$$(git describe --abbrev=0)-$$(git rev-parse --short HEAD)
 
+.PHONY: deploy
+
+default: build
+
 version:
 	@echo ${VERSION}
 
 build:
 	GOOS=${GOOS} GOARCH=${GOARCH} \
-		go build \
-			-ldflags="-w -s -X main.Version=${VERSION}" \
-			-o bin/${NAME} \
-			./cmd/main.go
-
-build-dev:
-	env GO111MODULE=on GOOS=${GOOS} GOARCH=${GOARCH} \
 		go build \
 			-ldflags="-w -s -X main.Version=${VERSION}" \
 			-o bin/${NAME} \
@@ -30,6 +27,9 @@ docker-build:
 	docker build -t gcr.io/${GCP_PROJECT}/${NAME}:${VERSION} -f Dockerfile .
 
 docker-push:
-	gcloud docker -- push gcr.io/${GCP_PROJECT}/${NAME}:${VERSION}
+	docker push gcr.io/${GCP_PROJECT}/${NAME}:${VERSION}
 
-release: build docker-build docker-push
+release: docker-build docker-push
+
+deploy:
+	ENV=${ENV} deploy/deploy.sh
