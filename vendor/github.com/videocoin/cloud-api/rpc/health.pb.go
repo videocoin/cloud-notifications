@@ -3,13 +3,15 @@
 
 package rpc
 
-import proto "github.com/gogo/protobuf/proto"
-import golang_proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
-import _ "github.com/gogo/protobuf/gogoproto"
-
-import io "io"
+import (
+	fmt "fmt"
+	_ "github.com/gogo/protobuf/gogoproto"
+	proto "github.com/gogo/protobuf/proto"
+	golang_proto "github.com/golang/protobuf/proto"
+	io "io"
+	math "math"
+	math_bits "math/bits"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -34,7 +36,7 @@ func (m *HealthStatus) Reset()         { *m = HealthStatus{} }
 func (m *HealthStatus) String() string { return proto.CompactTextString(m) }
 func (*HealthStatus) ProtoMessage()    {}
 func (*HealthStatus) Descriptor() ([]byte, []int) {
-	return fileDescriptor_health_0b343ffe537fe05d, []int{0}
+	return fileDescriptor_4793d71ec411382d, []int{0}
 }
 func (m *HealthStatus) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -51,8 +53,8 @@ func (m *HealthStatus) XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
 		return b[:n], nil
 	}
 }
-func (dst *HealthStatus) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_HealthStatus.Merge(dst, src)
+func (m *HealthStatus) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_HealthStatus.Merge(m, src)
 }
 func (m *HealthStatus) XXX_Size() int {
 	return m.Size()
@@ -77,6 +79,24 @@ func init() {
 	proto.RegisterType((*HealthStatus)(nil), "cloud.api.rpc.HealthStatus")
 	golang_proto.RegisterType((*HealthStatus)(nil), "cloud.api.rpc.HealthStatus")
 }
+
+func init() { proto.RegisterFile("rpc/health.proto", fileDescriptor_4793d71ec411382d) }
+func init() { golang_proto.RegisterFile("rpc/health.proto", fileDescriptor_4793d71ec411382d) }
+
+var fileDescriptor_4793d71ec411382d = []byte{
+	// 149 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x28, 0x2a, 0x48, 0xd6,
+	0xcf, 0x48, 0x4d, 0xcc, 0x29, 0xc9, 0xd0, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x4d, 0xce,
+	0xc9, 0x2f, 0x4d, 0xd1, 0x4b, 0x2c, 0xc8, 0xd4, 0x2b, 0x2a, 0x48, 0x96, 0xd2, 0x4d, 0xcf, 0x2c,
+	0xc9, 0x28, 0x4d, 0xd2, 0x4b, 0xce, 0xcf, 0xd5, 0x4f, 0xcf, 0x4f, 0xcf, 0xd7, 0x07, 0xab, 0x4a,
+	0x2a, 0x4d, 0x03, 0xf3, 0xc0, 0x1c, 0x30, 0x0b, 0xa2, 0x5b, 0x49, 0x8d, 0x8b, 0xc7, 0x03, 0x6c,
+	0x5a, 0x70, 0x49, 0x62, 0x49, 0x69, 0xb1, 0x90, 0x18, 0x17, 0x5b, 0x31, 0x98, 0x25, 0xc1, 0xa8,
+	0xc0, 0xa8, 0xc1, 0x19, 0x04, 0xe5, 0x39, 0x49, 0x9e, 0x78, 0x24, 0xc7, 0x78, 0xe1, 0x91, 0x1c,
+	0xe3, 0x83, 0x47, 0x72, 0x8c, 0x07, 0x1e, 0xcb, 0x31, 0x9e, 0x78, 0x2c, 0xc7, 0x18, 0xc5, 0x5c,
+	0x54, 0x90, 0x9c, 0xc4, 0x06, 0x36, 0xc9, 0x18, 0x10, 0x00, 0x00, 0xff, 0xff, 0x5b, 0xe1, 0x17,
+	0x4f, 0x9b, 0x00, 0x00, 0x00,
+}
+
 func (m *HealthStatus) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -130,14 +150,7 @@ func (m *HealthStatus) Size() (n int) {
 }
 
 func sovHealth(x uint64) (n int) {
-	for {
-		n++
-		x >>= 7
-		if x == 0 {
-			break
-		}
-	}
-	return n
+	return (math_bits.Len64(x|1) + 6) / 7
 }
 func sozHealth(x uint64) (n int) {
 	return sovHealth(uint64((x << 1) ^ uint64((int64(x) >> 63))))
@@ -157,7 +170,7 @@ func (m *HealthStatus) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= (uint64(b) & 0x7F) << shift
+			wire |= uint64(b&0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -185,7 +198,7 @@ func (m *HealthStatus) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= (uint64(b) & 0x7F) << shift
+				stringLen |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -195,6 +208,9 @@ func (m *HealthStatus) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthHealth
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthHealth
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -207,6 +223,9 @@ func (m *HealthStatus) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthHealth
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthHealth
 			}
 			if (iNdEx + skippy) > l {
@@ -276,8 +295,11 @@ func skipHealth(dAtA []byte) (n int, err error) {
 					break
 				}
 			}
-			iNdEx += length
 			if length < 0 {
+				return 0, ErrInvalidLengthHealth
+			}
+			iNdEx += length
+			if iNdEx < 0 {
 				return 0, ErrInvalidLengthHealth
 			}
 			return iNdEx, nil
@@ -308,6 +330,9 @@ func skipHealth(dAtA []byte) (n int, err error) {
 					return 0, err
 				}
 				iNdEx = start + next
+				if iNdEx < 0 {
+					return 0, ErrInvalidLengthHealth
+				}
 			}
 			return iNdEx, nil
 		case 4:
@@ -326,20 +351,3 @@ var (
 	ErrInvalidLengthHealth = fmt.Errorf("proto: negative length found during unmarshaling")
 	ErrIntOverflowHealth   = fmt.Errorf("proto: integer overflow")
 )
-
-func init() { proto.RegisterFile("rpc/health.proto", fileDescriptor_health_0b343ffe537fe05d) }
-func init() { golang_proto.RegisterFile("rpc/health.proto", fileDescriptor_health_0b343ffe537fe05d) }
-
-var fileDescriptor_health_0b343ffe537fe05d = []byte{
-	// 149 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x28, 0x2a, 0x48, 0xd6,
-	0xcf, 0x48, 0x4d, 0xcc, 0x29, 0xc9, 0xd0, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x4d, 0xce,
-	0xc9, 0x2f, 0x4d, 0xd1, 0x4b, 0x2c, 0xc8, 0xd4, 0x2b, 0x2a, 0x48, 0x96, 0xd2, 0x4d, 0xcf, 0x2c,
-	0xc9, 0x28, 0x4d, 0xd2, 0x4b, 0xce, 0xcf, 0xd5, 0x4f, 0xcf, 0x4f, 0xcf, 0xd7, 0x07, 0xab, 0x4a,
-	0x2a, 0x4d, 0x03, 0xf3, 0xc0, 0x1c, 0x30, 0x0b, 0xa2, 0x5b, 0x49, 0x8d, 0x8b, 0xc7, 0x03, 0x6c,
-	0x5a, 0x70, 0x49, 0x62, 0x49, 0x69, 0xb1, 0x90, 0x18, 0x17, 0x5b, 0x31, 0x98, 0x25, 0xc1, 0xa8,
-	0xc0, 0xa8, 0xc1, 0x19, 0x04, 0xe5, 0x39, 0x49, 0x9e, 0x78, 0x24, 0xc7, 0x78, 0xe1, 0x91, 0x1c,
-	0xe3, 0x83, 0x47, 0x72, 0x8c, 0x07, 0x1e, 0xcb, 0x31, 0x9e, 0x78, 0x2c, 0xc7, 0x18, 0xc5, 0x5c,
-	0x54, 0x90, 0x9c, 0xc4, 0x06, 0x36, 0xc9, 0x18, 0x10, 0x00, 0x00, 0xff, 0xff, 0x5b, 0xe1, 0x17,
-	0x4f, 0x9b, 0x00, 0x00, 0x00,
-}
