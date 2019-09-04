@@ -9,7 +9,7 @@ type Config struct {
 	Version string `envconfig:"-"`
 
 	MQURI     string `default:"amqp://guest:guest@127.0.0.1:5672" envconfig:"MQURI"`
-	Templates string `default:"templates"`
+	Templates string `default:"templates" envconfig:"TEMPLATES"`
 
 	FromEmail string `default:"support@videocoin.network"`
 
