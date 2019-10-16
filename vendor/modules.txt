@@ -69,10 +69,10 @@ github.com/uber/jaeger-lib/metrics
 github.com/vanng822/css
 # github.com/vanng822/go-premailer v0.0.0-20190504065308-ac25997d78c7
 github.com/vanng822/go-premailer/premailer
-# github.com/videocoin/cloud-api v0.1.178
+# github.com/videocoin/cloud-api v0.2.14
 github.com/videocoin/cloud-api/notifications/v1
 github.com/videocoin/cloud-api/rpc
-# github.com/videocoin/cloud-pkg v0.0.5
+# github.com/videocoin/cloud-pkg v0.0.6
 github.com/videocoin/cloud-pkg/logger
 github.com/videocoin/cloud-pkg/tracer
 github.com/videocoin/cloud-pkg/mqmux
@@ -87,12 +87,12 @@ golang.org/x/net/http/httpguts
 golang.org/x/net/idna
 # golang.org/x/sys v0.0.0-20190602015325-4c4f7f33c9ed
 golang.org/x/sys/unix
-# golang.org/x/text v0.3.1-0.20180807135948-17ff2d5776d2
+# golang.org/x/text v0.3.0
 golang.org/x/text/secure/bidirule
 golang.org/x/text/unicode/bidi
 golang.org/x/text/unicode/norm
 golang.org/x/text/transform
-# google.golang.org/genproto v0.0.0-20190404172233-64821d5d2107
+# google.golang.org/genproto v0.0.0-20180817151627-c66870c02cf8
 google.golang.org/genproto/googleapis/rpc/status
 # google.golang.org/grpc v1.21.1
 google.golang.org/grpc

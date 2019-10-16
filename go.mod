@@ -14,7 +14,8 @@ require (
 	github.com/streadway/amqp v0.0.0-20190404075320-75d898a42a94
 	github.com/vanng822/css v0.0.0-20190504095207-a21e860bcd04 // indirect
 	github.com/vanng822/go-premailer v0.0.0-20190504065308-ac25997d78c7
-	github.com/videocoin/cloud-api v0.1.178
-	github.com/videocoin/cloud-pkg v0.0.5
+	github.com/videocoin/cloud-api v0.2.14
+	github.com/videocoin/cloud-pkg v0.0.6
+	golang.org/x/net v0.0.0-20190522155817-f3200d17e092 // indirect
 	gopkg.in/yaml.v2 v2.2.2
 )
