@@ -5,4 +5,10 @@ email:
     subject: Welcome To The VideoCoin Network
   user_recovery:
     subject: "Password Recovery"
+  user_withdraw_confirmation:
+    subject: "Withdraw Confirmation"
+  user_withdraw_succeeded:
+    subject: "Withdraw Succeeded"
+  user_withdraw_failed:
+    subject: "Withdraw Failed"
 web: {}
