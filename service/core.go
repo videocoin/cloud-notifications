@@ -7,8 +7,6 @@ import (
 	"fmt"
 	"os"
 
-	v1 "github.com/videocoin/cloud-api/notifications/v1"
-	"github.com/videocoin/cloud-pkg/mqmux"
 	"github.com/centrifugal/gocent"
 	"github.com/opentracing/opentracing-go"
 	"github.com/opentracing/opentracing-go/ext"
@@ -16,6 +14,8 @@ import (
 	"github.com/sendgrid/sendgrid-go/helpers/mail"
 	"github.com/sirupsen/logrus"
 	"github.com/streadway/amqp"
+	v1 "github.com/videocoin/cloud-api/notifications/v1"
+	"github.com/videocoin/cloud-pkg/mqmux"
 )
 
 var (
@@ -129,6 +129,8 @@ func (c *Core) performEmailNotification(n *v1.Notification) error {
 	if !ok {
 		return ErrUnknownRecipient
 	}
+
+	n.Params["subject"] = nt.Subject
 
 	html, err := c.store.renderTemplate(n.Template, n.Params)
 	if err != nil {

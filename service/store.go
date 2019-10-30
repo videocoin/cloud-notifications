@@ -4,12 +4,12 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
+	"html/template"
 	"io/ioutil"
 	"os"
-	"text/template"
 
-	v1 "github.com/videocoin/cloud-api/notifications/v1"
 	"github.com/vanng822/go-premailer/premailer"
+	v1 "github.com/videocoin/cloud-api/notifications/v1"
 	"gopkg.in/yaml.v2"
 )
 
@@ -52,14 +52,33 @@ func NewTemplateStore(path string) (*TemplateStore, error) {
 	return store, nil
 }
 
+func newTemplate(name, path string, fn template.FuncMap) (*template.Template, error) {
+	return template.New(fmt.Sprintf("%s.html", name)).Funcs(fn).ParseFiles(fmt.Sprintf("%s/%s.html", path, name))
+}
+
 func (ts *TemplateStore) renderTemplate(name string, params map[string]string) (string, error) {
-	t, err := template.ParseFiles(fmt.Sprintf("%s/%s.html", ts.path, name), ts.path+"/style.css")
+	tc, err := newTemplate(name, ts.path, nil)
+	if err != nil {
+		return "", err
+	}
+
+	var content bytes.Buffer
+	err = tc.ExecuteTemplate(&content, fmt.Sprintf("%s.html", name), params)
+	if err != nil {
+		return "", err
+	}
+
+	tb, err := newTemplate("base.html", ts.path, template.FuncMap{
+		"content": func() template.HTML {
+			return template.HTML(content.String())
+		},
+	})
 	if err != nil {
 		return "", err
 	}
 
 	var buf bytes.Buffer
-	err = t.ExecuteTemplate(&buf, name+".html", params)
+	err = tb.Execute(&buf, params)
 	if err != nil {
 		return "", err
 	}
