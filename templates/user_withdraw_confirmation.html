@@ -1,70 +1,43 @@
-<span class="preheader"></span>
-<table border="0" cellpadding="0" cellspacing="0" class="body" role="presentation">
+<table border="0" cellpadding="0" cellspacing="0" role="presentation">
   <tr>
-    <td>&nbsp;</td>
-    <td class="container">
-      <div class="content">
-        <div class="header">
-          <table border="0" cellpadding="0" cellspacing="0" role="presentation">
-            <tr>
-              <td class="content-block">
-                <img alt="VideoCoin" height="73" src="https://storage.googleapis.com/vc-static-content/logo.png"
-                  width="255" />
-              </td>
-            </tr>
-          </table>
-        </div>
-        <table class="main" role="presentation">
-          <tr>
-            <td class="wrapper">
-              <table border="0" cellpadding="0" cellspacing="0" role="presentation">
-                <tr>
-                  <td>
-                    <div class="subtitle">Publisher Studio</div>
-                    <div class="title">Withdraw Confirmation</div>
-                    <p style="margin-bottom: 48px">
-                      A withdrawal of <b>{{.amount}}</b> VID to address
-                      <b>{{.address}}</b> has been requested from
-                      your VideoCoin account. <br />
-                    </p>
-                    <p style="margin-bottom: 68px">
-                      Copy the 6 digit code below and paste it into the confirmation
-                      popup in the Publisher Studio to confirm withdrawal. <br />
+    <td>
+      <div class="subtitle">Publisher Studio</div>
+      <div class="title">Withdraw Confirmation</div>
+      <p style="margin-bottom: 48px">
+        A withdrawal of <b>{{.amount}}</b> VID to address
+        <b>{{.address}}</b> has been requested from
+        your VideoCoin account. <br />
+      </p>
+      <p style="margin-bottom: 68px">
+        Copy the 6 digit code below and paste it into the confirmation
+        popup in the Publisher Studio to confirm withdrawal. <br />
 
-                      <span style="font-size: 48px; text-align: center; color: #0C0417">
-                        {{.pin}}
-                      </span>
-                    </p>
-                    <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary" role="presentation">
-                      <tbody>
-                        <tr>
-                          <td align="center">
-                            <table border="0" cellpadding="0" cellspacing="0" role="presentation">
-                              <tbody>
-                                <tr>
-                                  <td>
-                                    <a href="#" target="_blank">Reset
-                                      Password</a>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <p style="font-weight: 300; font-size: 12px; margin-top: 9px">
-                      If you did not request a withdrawal, change your password and contact
-                      <a mailto="support@videocoin.io">support@videocoin.io</a> immediately.
-                    </p>
-                  </td>
-                </tr>
+        <span style="font-size: 48px; text-align: center; color: #0C0417">
+          {{.pin}}
+        </span>
+      </p>
+      <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary" role="presentation">
+        <tbody>
+          <tr>
+            <td align="center">
+              <table border="0" cellpadding="0" cellspacing="0" role="presentation">
+                <tbody>
+                  <tr>
+                    <td>
+                      <a href="#" target="_blank">Reset
+                        Password</a>
+                    </td>
+                  </tr>
+                </tbody>
               </table>
             </td>
           </tr>
-        </table>
-      </div>
+        </tbody>
+      </table>
+      <p style="font-weight: 300; font-size: 12px; margin-top: 9px">
+        If you did not request a withdrawal, change your password and contact
+        <a mailto="support@videocoin.io">support@videocoin.io</a> immediately.
+      </p>
     </td>
-    <td>&nbsp;</td>
   </tr>
 </table>
