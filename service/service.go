@@ -5,6 +5,7 @@ import "github.com/videocoin/cloud-pkg/mqmux"
 type Service struct {
 	cfg  *Config
 	core *Core
+	rpc  *RpcServer
 }
 
 func NewService(cfg *Config) (*Service, error) {
@@ -29,8 +30,19 @@ func NewService(cfg *Config) (*Service, error) {
 		return nil, err
 	}
 
+	rpcConfig := &RpcServerOpts{
+		Logger:  cfg.Logger,
+		Addr:    cfg.RPCAddr,
+	}
+
+	rpc, err := NewRpcServer(rpcConfig)
+	if err != nil {
+		return nil, err
+	}
+
 	svc := &Service{
 		cfg:  cfg,
+		rpc:  rpc,
 		core: core,
 	}
 
@@ -39,6 +51,7 @@ func NewService(cfg *Config) (*Service, error) {
 
 func (s *Service) Start() error {
 	go s.core.Start()
+	go s.rpc.Start()
 	return nil
 }
 
