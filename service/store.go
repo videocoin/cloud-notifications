@@ -68,7 +68,7 @@ func (ts *TemplateStore) renderTemplate(name string, params map[string]string) (
 		return "", err
 	}
 
-	tb, err := newTemplate("base.html", ts.path, template.FuncMap{
+	tb, err := newTemplate("base", ts.path, template.FuncMap{
 		"content": func() template.HTML {
 			return template.HTML(content.String())
 		},
