@@ -1,6 +1,9 @@
 package service
 
-import "github.com/videocoin/cloud-pkg/mqmux"
+import (
+	"github.com/videocoin/cloud-pkg/mqmux"
+	"strings"
+)
 
 type Service struct {
 	cfg  *Config
@@ -16,6 +19,7 @@ func NewService(cfg *Config) (*Service, error) {
 
 	coreOpts := &CoreOption{
 		FromEmail: cfg.FromEmail,
+		InternalEmails: strings.Fields(cfg.InternalEmails),
 		Logger:    cfg.Logger,
 	}
 

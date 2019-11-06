@@ -25,8 +25,9 @@ var (
 )
 
 type CoreOption struct {
-	FromEmail string
-	Logger    *logrus.Entry
+	FromEmail      string
+	InternalEmails []string
+	Logger         *logrus.Entry
 }
 
 type Core struct {
@@ -125,33 +126,52 @@ func (c *Core) performEmailNotification(n *v1.Notification) error {
 		return err
 	}
 
-	toEmail, ok := n.Params["to"]
-	if !ok {
-		return ErrUnknownRecipient
-	}
-
 	n.Params["subject"] = nt.Subject
-
 	html, err := c.store.renderTemplate(n.Template, n.Params)
 	if err != nil {
 		logger.Error(err)
 		return err
 	}
 
-	logger.WithField("to", toEmail).Info("sending email")
+	_, ok := n.Params["internal"]
+	if ok {
+		for _, to := range c.opts.InternalEmails {
+			err = c.sendEmail(to, nt.Subject, html)
+			if err != nil {
+				logger.Error(err)
+				return err
+			}
+		}
+	} else {
+		to, ok := n.Params["to"]
+		if !ok {
+			return ErrUnknownRecipient
+		}
 
-	from := mail.NewEmail("VideoCoin", c.opts.FromEmail)
-	to := mail.NewEmail("", toEmail)
-	message := mail.NewSingleEmail(from, nt.Subject, to, " ", html)
+		err = c.sendEmail(to, nt.Subject, html)
+		if err != nil {
+			logger.Error(err)
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (c *Core) sendEmail(to, subject, content string) error {
+	c.logger.WithField("to", to).Info("sending email")
+
+	message := mail.NewSingleEmail(
+		mail.NewEmail("VideoCoin", c.opts.FromEmail), subject, mail.NewEmail("", to), " ", content)
 	resp, err := c.email.Send(message)
 	if err != nil {
-		logger.Error(err)
+		c.logger.Error(err)
 		return err
 	}
 
 	if resp.StatusCode >= 400 && resp.StatusCode < 600 {
 		respErr := fmt.Errorf("failed to send email: %s", resp.Body)
-		logger.Error(respErr)
+		c.logger.Error(respErr)
 		return respErr
 	}
 
