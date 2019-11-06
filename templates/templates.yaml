@@ -11,4 +11,6 @@ email:
     subject: "Withdraw Succeeded"
   user_withdraw_failed:
     subject: "Withdraw Failed"
+  stream_published:
+    subject: "Stream Published"
 web: {}
