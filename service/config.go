@@ -13,5 +13,7 @@ type Config struct {
 	RPCAddr   string `required:"true" envconfig:"RPC_ADDR" default:"127.0.0.1:5005"`
 	FromEmail string `default:"support@videocoin.network"`
 
+	InternalEmails string `default:"dmitry@liveplanet.net adidenko@liveplanet.net" envconfig:"INTERNAL_EMAILS"`
+
 	Logger *logrus.Entry `envconfig:"-"`
 }
