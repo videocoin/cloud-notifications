@@ -60,7 +60,7 @@ func NewCore(mq *mqmux.WorkerMux, store *TemplateStore, opts *CoreOption) (*Core
 }
 
 func (c *Core) Start() error {
-	err := c.mq.Consumer("notifications/send", 5, false, c.performMessage)
+	err := c.mq.Consumer("notifications.send", 5, false, c.performMessage)
 	if err != nil {
 		return err
 	}
