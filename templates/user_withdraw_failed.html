@@ -4,13 +4,19 @@
       <div class="subtitle">Publisher Studio</div>
       <div class="title">Withdraw Failed</div>
       <p style="margin-bottom: 48px">
-        A withdrawal of <b>{{.amount}}</b> VID to address
-        <b>{{.address}}</b> has failed to send because of next reason: <br />
-
-        <b>{{.reason}}</b>
-        <br />
-
-        Try again or contact <a mailto="support@videocoin.io">support@videocoin.io</a> to consult.
+        Your requested withdrawal of <br />
+        <span style="text-align: center;">
+          <b>{{.amount}} VID</b>
+        </span> <br />
+        to address: <br />
+        <span style="text-align: center;">
+          {{.address}}
+        </span> <br />
+        has failed because of the following reason: <br />
+        <span style="text-align: center;">
+          {{.reason}}
+        </span> <br />
+        Try again or contact <a mailto="support@videocoin.io">support@videocoin.io</a> to get help.
       </p>
       <p style="font-weight: 300; font-size: 12px; margin-top: 9px">
         If you did not request a withdrawal, change your password and contact
