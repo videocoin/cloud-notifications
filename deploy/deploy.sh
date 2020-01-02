@@ -49,6 +49,7 @@ function has_helm {
 function get_vars() {
     log_info "Getting variables..."
     readonly KUBE_CONTEXT=`consul kv get -http-addr=${CONSUL_ADDR} config/${ENV}/common/kube_context`
+    readonly ENV=`consul kv get -http-addr=${CONSUL_ADDR} config/${ENV}/services/${CHART_NAME}/vars/env`
     readonly MQ_URI=`consul kv get -http-addr=${CONSUL_ADDR} config/${ENV}/services/${CHART_NAME}/secrets/mqUri`
     readonly SENDGRID_API_KEY=`consul kv get -http-addr=${CONSUL_ADDR} config/${ENV}/services/${CHART_NAME}/secrets/sendgridApiKey`
     readonly CENT_API_ADDR=`consul kv get -http-addr=${CONSUL_ADDR} config/${ENV}/services/${CHART_NAME}/secrets/centApiAddr`
@@ -62,6 +63,7 @@ function deploy() {
         --kube-context "${KUBE_CONTEXT}" \
         --install \
         --set image.tag="${VERSION}" \
+        --set config.env="${ENV}" \
         --set secrets.mqUri="${MQ_URI}" \
         --set secrets.sendgridApiKey="${SENDGRID_API_KEY}" \
         --set secrets.centApiAddr="${CENT_API_ADDR}" \

@@ -27,6 +27,7 @@ var (
 type CoreOption struct {
 	FromEmail      string
 	InternalEmails []string
+	Env            string
 	Logger         *logrus.Entry
 }
 
@@ -135,11 +136,13 @@ func (c *Core) performEmailNotification(n *v1.Notification) error {
 
 	_, ok := n.Params["internal"]
 	if ok {
-		for _, to := range c.opts.InternalEmails {
-			err = c.sendEmail(to, nt.Subject, html)
-			if err != nil {
-				logger.Error(err)
-				return err
+		if c.opts.Env == "kili" {
+			for _, to := range c.opts.InternalEmails {
+				err = c.sendEmail(to, nt.Subject, html)
+				if err != nil {
+					logger.Error(err)
+					return err
+				}
 			}
 		}
 	} else {

@@ -32,6 +32,11 @@ spec:
           env:
             - name: TEMPLATES
               value: /opt/videocoin/bin
+            - name: ENV
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Chart.Name }}
+                  key: env
             - name: MQURI
               valueFrom:
                 secretKeyRef:
