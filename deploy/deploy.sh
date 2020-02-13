@@ -6,6 +6,7 @@ readonly CHART_DIR=./deploy/helm
 CONSUL_ADDR=${CONSUL_ADDR:=127.0.0.1:8500}
 ENV=${ENV:=dev}
 VERSION=${VERSION:=`git describe --abbrev=0`-`git rev-parse --abbrev-ref HEAD`-`git rev-parse --short HEAD`}
+GCP_PROJECT=${GCP_PROJECT:=videocoin-network}
 
 function log {
   local readonly level="$1"
@@ -62,6 +63,7 @@ function deploy() {
         --kube-context "${KUBE_CONTEXT}" \
         --install \
         --set image.tag="${VERSION}" \
+        --set image.repository="gcr.io/${GCP_PROJECT}/${CHART_NAME}" \
         --set config.env="${ENV}" \
         --set secrets.mqUri="${MQ_URI}" \
         --set secrets.sendgridApiKey="${SENDGRID_API_KEY}" \
