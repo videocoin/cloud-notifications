@@ -136,7 +136,7 @@ func (c *Core) performEmailNotification(n *v1.Notification) error {
 
 	_, ok := n.Params["internal"]
 	if ok {
-		if c.opts.Env == "kili" {
+		if c.opts.Env != "dev" && c.opts.Env != "snb" {
 			for _, to := range c.opts.InternalEmails {
 				err = c.sendEmail(to, nt.Subject, html)
 				if err != nil {
