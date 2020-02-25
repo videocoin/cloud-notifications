@@ -97,16 +97,16 @@ func (ts *TemplateStore) renderTemplate(name string, params map[string]string) (
 	return html, nil
 }
 
-func (s *TemplateStore) GetTemplate(t v1.NotificationTarget, name string) (*Template, error) {
+func (ts *TemplateStore) GetTemplate(t v1.NotificationTarget, name string) (*Template, error) {
 	switch t {
 	case v1.NotificationTarget_EMAIL:
-		template, ok := s.Email[name]
+		template, ok := ts.Email[name]
 		if !ok {
 			return nil, ErrTemplateNotFound
 		}
 		return &template, nil
 	case v1.NotificationTarget_WEB:
-		template, ok := s.Web[name]
+		template, ok := ts.Web[name]
 		if !ok {
 			return nil, ErrTemplateNotFound
 		}

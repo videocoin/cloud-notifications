@@ -1,14 +1,15 @@
 package service
 
 import (
-	"github.com/videocoin/cloud-pkg/mqmux"
 	"strings"
+
+	"github.com/videocoin/cloud-pkg/mqmux"
 )
 
 type Service struct {
 	cfg  *Config
 	core *Core
-	rpc  *RpcServer
+	rpc  *RPCServer
 }
 
 func NewService(cfg *Config) (*Service, error) {
@@ -18,9 +19,9 @@ func NewService(cfg *Config) (*Service, error) {
 	}
 
 	coreOpts := &CoreOption{
-		FromEmail: cfg.FromEmail,
+		FromEmail:      cfg.FromEmail,
 		InternalEmails: strings.Fields(cfg.InternalEmails),
-		Logger:    cfg.Logger,
+		Logger:         cfg.Logger,
 	}
 
 	mq, err := mqmux.NewWorkerMux(cfg.MQURI, cfg.Name)
@@ -34,12 +35,12 @@ func NewService(cfg *Config) (*Service, error) {
 		return nil, err
 	}
 
-	rpcConfig := &RpcServerOpts{
-		Logger:  cfg.Logger,
-		Addr:    cfg.RPCAddr,
+	rpcConfig := &RPCServerOpts{
+		Logger: cfg.Logger,
+		Addr:   cfg.RPCAddr,
 	}
 
-	rpc, err := NewRpcServer(rpcConfig)
+	rpc, err := NewRPCServer(rpcConfig)
 	if err != nil {
 		return nil, err
 	}
@@ -54,12 +55,12 @@ func NewService(cfg *Config) (*Service, error) {
 }
 
 func (s *Service) Start() error {
-	go s.core.Start()
-	go s.rpc.Start()
+	go s.core.Start()  //nolint
+	go s.rpc.Start()  //nolint
 	return nil
 }
 
 func (s *Service) Stop() error {
-	s.core.Stop()
-	return nil
+	err := s.core.Stop()
+	return err
 }
