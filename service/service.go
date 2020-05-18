@@ -22,6 +22,7 @@ func NewService(cfg *Config) (*Service, error) {
 		FromEmail:      cfg.FromEmail,
 		InternalEmails: strings.Fields(cfg.InternalEmails),
 		Logger:         cfg.Logger,
+		Env:            cfg.Env,
 	}
 
 	mq, err := mqmux.NewWorkerMux(cfg.MQURI, cfg.Name)
