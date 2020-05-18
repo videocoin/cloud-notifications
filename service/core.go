@@ -128,6 +128,8 @@ func (c *Core) performEmailNotification(n *v1.Notification) error {
 	}
 
 	n.Params["subject"] = nt.Subject
+	n.Params["domain"] = fmt.Sprintf("console.%s.videocoin.network", c.opts.Env)
+
 	html, err := c.store.renderTemplate(n.Template, n.Params)
 	if err != nil {
 		logger.Error(err)

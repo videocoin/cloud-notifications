@@ -16,7 +16,6 @@ require (
 	github.com/vanng822/go-premailer v0.0.0-20190504065308-ac25997d78c7
 	github.com/videocoin/cloud-api v0.2.15
 	github.com/videocoin/cloud-pkg v0.0.6
-	golang.org/x/net v0.0.0-20190522155817-f3200d17e092 // indirect
 	google.golang.org/grpc v1.21.1
 	gopkg.in/yaml.v2 v2.2.2
 )
