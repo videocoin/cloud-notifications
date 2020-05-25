@@ -57,12 +57,13 @@ func NewService(cfg *Config) (*Service, error) {
 
 func (s *Service) Start(errCh chan error) {
 	go func() {
-		errCh <- s.core.Start()
-	}()
-
-	go func() {
 		errCh <- s.rpc.Start()
 	}()
+
+	err := s.core.Start()
+	if err != nil {
+		errCh <- err
+	}
 }
 
 func (s *Service) Stop() error {
