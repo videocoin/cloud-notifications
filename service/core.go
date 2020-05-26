@@ -128,7 +128,11 @@ func (c *Core) performEmailNotification(n *v1.Notification) error {
 	}
 
 	n.Params["subject"] = nt.Subject
-	n.Params["domain"] = fmt.Sprintf("console.%s.videocoin.network", c.opts.Env)
+	if c.opts.Env == "everest" {
+		n.Params["domain"] = fmt.Sprintf("console.videocoin.network")
+	} else {
+		n.Params["domain"] = fmt.Sprintf("console.%s.videocoin.network", c.opts.Env)
+	}
 
 	html, err := c.store.renderTemplate(n.Template, n.Params)
 	if err != nil {
