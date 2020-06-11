@@ -2,20 +2,26 @@ replicasCount: 1
 maxUnavailableCount: 0
 
 image:
-  repository: gcr.io/videocoin-network/notifications
+  repository: registry.videocoin.net/cloud/notifications
   tag: latest
   pullPolicy: Always
+  pullSecrets: 
+  - name: regcred
 
-config: {}
+serviceAccount:
+  name: default
+
+config:
+  env: dev
 
 service:
   type: ClusterIP
-  externalRpcPort: 5005
-  internalRpcPort: 5005
+  ports:
+    grpc: 5005
 
 autoscaler:
   minCount: 1
-  maxCount: 10
+  maxCount: 3
   targets:
     targetCPUUtilizationPercentage: 70
 
@@ -28,8 +34,5 @@ resources:
     memory: 200Mi
 
 secrets:
-  mqUri: ""
+  mqUri: "YW1xcDovL3VzZXI6Skpveld2d0pDM0ByYWJiaXRtcS5jb25zb2xlLnN2Yy5jbHVzdGVyLmxvY2FsOjU2NzI="
   sentryDsn: ""
-  sendgridApiKey: ""
-  centApiAddr: ""
-  centApiKey: ""

@@ -17,19 +17,31 @@ spec:
       labels:
         app: {{ .Release.Name }}
     spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      serviceAccountName: {{ .Values.serviceAccount.name }}
+      automountServiceAccountToken: true
       containers:
         - name: {{ .Release.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           readinessProbe:
             exec:
-              command: ["/bin/grpc_health_probe", "-addr=:{{ .Values.service.internalRpcPort }}"]
+              command: ["/bin/grpc_health_probe", "-addr=:{{ .Values.service.ports.grpc }}"]
             initialDelaySeconds: 5
           livenessProbe:
             exec:
-              command: ["/bin/grpc_health_probe", "-addr=:{{ .Values.service.internalRpcPort }}"]
+              command: ["/bin/grpc_health_probe", "-addr=:{{ .Values.service.ports.grpc }}"]
             initialDelaySeconds: 10
           env:
+            - name: JAEGER_AGENT_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: JAEGER_AGENT_PORT
+              value: "6831"
             - name: TEMPLATES
               value: /opt/videocoin/bin
             - name: ENV
@@ -42,21 +54,6 @@ spec:
                 secretKeyRef:
                   name: {{ .Chart.Name }}
                   key: mqUri
-            - name: SENDGRID_API_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Chart.Name }}
-                  key: sendgridApiKey
-            - name: CENT_API_ADDR
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Chart.Name }}
-                  key: centApiAddr
-            - name: CENT_API_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Chart.Name }}
-                  key: centApiKey
             - name: SENTRY_DSN
               valueFrom:
                 secretKeyRef:
@@ -73,5 +70,7 @@ spec:
         - name: secrets
           secret:
             secretName: {{ .Release.Name }}
+    {{- with .Values.nodeSelector }}
       nodeSelector:
-        cloud.google.com/gke-nodepool: api
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
