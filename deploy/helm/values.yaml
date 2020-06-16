@@ -12,7 +12,8 @@ serviceAccount:
   name: default
 
 config:
-  env: dev
+  ENV: dev
+  TEMPLATES: /templates
 
 service:
   type: ClusterIP
@@ -33,6 +34,16 @@ resources:
     cpu: 200m
     memory: 200Mi
 
-secrets:
-  mqUri: "YW1xcDovL3VzZXI6Skpveld2d0pDM0ByYWJiaXRtcS5jb25zb2xlLnN2Yy5jbHVzdGVyLmxvY2FsOjU2NzI="
-  sentryDsn: ""
+annotations:
+  vault.hashicorp.com/agent-inject: "true"
+  vault.hashicorp.com/role: "console-notifications"
+  vault.hashicorp.com/agent-inject-secret-common: "videocoin/v1/networks/everest-dev/console/common"
+  vault.hashicorp.com/agent-inject-secret-config: "videocoin/v1/networks/everest-dev/console/notifications"
+  vault.hashicorp.com/agent-inject-template-common: |
+    {{ with secret "videocoin/v1/networks/everest-dev/console/common" }}{{ range $k, $v := .Data }}
+    export {{ $k }}="{{ $v }}"
+    {{ end }}{{ end }}
+  vault.hashicorp.com/agent-inject-template-config: |
+    {{ with secret "videocoin/v1/networks/everest-dev/console/notifications" }}{{ range $k, $v := .Data }}
+    export {{ $k }}="{{ $v }}"
+    {{ end }}{{ end }}
