@@ -4,7 +4,7 @@ maxUnavailableCount: 0
 image:
   repository: registry.videocoin.net/cloud/notifications
   tag: latest
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
   pullSecrets: 
   - name: regcred
 
@@ -20,19 +20,13 @@ service:
   ports:
     grpc: 5005
 
-autoscaler:
-  minCount: 1
-  maxCount: 3
-  targets:
-    targetCPUUtilizationPercentage: 70
-
 resources:
   limits:
     cpu: 200m
     memory: 200Mi
   requests:
-    cpu: 200m
-    memory: 200Mi
+    cpu: 10m
+    memory: 16Mi
 
 annotations:
   vault.hashicorp.com/agent-inject: "true"
