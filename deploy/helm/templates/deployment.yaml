@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Release.Name }}
@@ -11,6 +11,9 @@ spec:
   strategy:
     rollingUpdate:
       maxUnavailable: {{ .Values.maxUnavailableCount }}
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
   template:
     metadata:
       name: {{ .Release.Name }}
